@@ -20,9 +20,11 @@ class BabySitter
 
     def receives_12_start_to_bedtime
         if (@start.between?(17, 24) && @start < @bed)
+            #if baby sitter job ends after MIDNIGHT
             if @end.between?(1,4)
     	       return (@bed - @start) * RATE_BEFORE_bed
             else
+                #if baby sitter job ends before midnight
                 if @end > @bed
                     return (@bed - @start) * RATE_BEFORE_bed 
                 else
@@ -35,10 +37,12 @@ class BabySitter
 
     def receives_8_bedtime_to_midnight
         if (@start.between?(17, 24))
+            #if baby sitter job ends after MIDNIGHT
             if @end.between?(1,4)
                 return (MIDNIGHT_TIME - @start) * RATE_AFTER_bed if @start < MIDNIGHT_TIME && @start > @bed
     	       return (MIDNIGHT_TIME - @bed) * RATE_AFTER_bed   if @start < MIDNIGHT_TIME && @bed < MIDNIGHT_TIME
             else
+                #if baby sitter job ends before midnight
                 return (@end - @bed) * RATE_AFTER_bed if @end > @bed && @start <= @bed
                 return (@end - @start) * RATE_AFTER_bed if @end > @bed && @start >= @bed
             end
@@ -47,6 +51,7 @@ class BabySitter
     end
 
     def receives_16_midnight_to_end
+        #if baby sitter ended job b/w 1AM - 4AM
         if @end.between?(1,4)
             return @end * RATE_AFTER_MIDNIGHT if @start.between?(17, 24)
             return (@end - @start) * RATE_AFTER_MIDNIGHT if @start.between?(1, 4)
