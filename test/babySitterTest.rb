@@ -8,13 +8,37 @@ require 'babySitter'
 
 class BabySitterTest < Test::Unit::TestCase
 
+	def setup
+		@sitter = BabySitter.new(17, 20,4)
+	end
+	
 	def test_pay_from_start_to_bedtime
-		babysitter = BabySitter.new(18, 4, 21)
-		assert_equal(36, babysitter.receives_12_per_hour())
+		assert_equal(36, @sitter.receives_12_per_hour())
 	end
 
 	def test_pay_from_bedtime_to_midnight
-		babysitter = BabySitter.new(18, 4, 21)
-		assert_equal(24, babysitter.receives_8_per_hour())
+		assert_equal(32, @sitter.receives_8_per_hour())
+	end
+
+	def test_pay_from_midnight_to_end
+		assert_equal(64, @sitter.receives_16_per_hour())
+	end
+
+	def test_total_pay
+		assert_equal(132, @sitter.calculate())		
 	end
 end
+
+
+#Also tested with other inputs listed below
+
+#@sitter = BabySitter.new(17, 20,4)
+#@sitter = BabySitter.new(21, 20,4)
+#@sitter = BabySitter.new(24, 20,4)
+#@sitter = BabySitter.new(1, 20,4)
+#@sitter = BabySitter.new(4, 20,4)
+#@sitter = BabySitter.new(17, 20,22)
+#@sitter = BabySitter.new(21, 20,22)
+#@sitter = BabySitter.new(20, 20, 22)
+#@sitter = BabySitter.new(17, 20,20)
+#@sitter = BabySitter.new(17, 20, 19)
