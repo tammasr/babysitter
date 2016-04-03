@@ -13,7 +13,6 @@ class BabySitterTest < Test::Unit::TestCase
 	end
 
 	def test_pay_from_start_to_bedtime
-
 		assert_equal(36, @sitter.receives_12_start_to_bedtime())
 	end
 
